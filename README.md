@@ -18,3 +18,8 @@
 ### 项目场景(ProjectScene)
 
 - [常用工具函数](Engineering/ProjectScene/常用工具函数.md)
+- [Vue中复杂表单的验证和数据提交方案](Engineering/ProjectScene/Vue中复杂表单的验证和数据提交方案.md)
+
+## 编程思想(ProgrammingIdeas)
+
+- [从表单提交看策略模式](ProgrammingIdeas/从表单提交看策略模式.md)
