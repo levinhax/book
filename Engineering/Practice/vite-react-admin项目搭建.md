@@ -176,7 +176,7 @@ https://typicode.github.io/husky/#/?id=usage
 package.json
 ```
   "scripts": {
-    "precommit": "lint-staged"
+    "prepare": "husky install"
   },
 ```
 
