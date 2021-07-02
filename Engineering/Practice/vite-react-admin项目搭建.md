@@ -167,6 +167,61 @@ package.json
 
 https://typicode.github.io/husky/#/?id=usage
 
+1. npx husky-init
+
+运行完成之后，我们可以看到项目根目录多了一个 .husky 的文件夹，里面自动创建了一个 pre-commit 的钩子，如下图：
+
+![husky](images/009.png)
+
+package.json
+```
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+```
+
+2. 配置钩子
+
+在 package.json 内，配置 lint-staged：
+
+```
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "npm run lint"
+    ]
+  },
+```
+
+在 .husky/pre-commit 内配置好要执行的命令：
+https://typicode.github.io/husky/#/?id=husky_git_params-ie-commitlint-
+
+```
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx lint-staged
+```
+
+在 .husky 文件夹下新建 commit-msg 文件，填入如下信息
+```
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx --no-install commitlint --edit $1
+```
+
+3. 清理 package.json 中 husky 字段内容
+```
+  // "husky": {
+  //   "hooks": {
+  //     "pre-commit": "lint-staged",
+  //     "commit-msg": "commitlint --config .commitlintrc.js -E HUSKY_GIT_PARAMS"
+  //   }
+  // },
+```
+
+4. 测试钩子
+
 ### CHANGELOG
 
 ```
