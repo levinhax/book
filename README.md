@@ -24,3 +24,17 @@
 ## 编程思想(ProgrammingIdeas)
 
 - [从表单提交看策略模式](ProgrammingIdeas/从表单提交看策略模式.md)
+
+## 计算机基础(Computer)
+
+### 数据结构(DataStructure)
+
+- [栈](Computer/DataStructure/栈.md)
+
+### 算法(Algorithm)
+
+- [扁平数据结构转Tree](Computer/Algorithm/扁平数据结构转Tree.md)
+
+### 网络与浏览器(Internet)
+
+- [跨域的9种解决方式](Computer/Internet/跨域的9种解决方式.md)
