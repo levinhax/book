@@ -15,6 +15,7 @@
 
 - [Vue项目性能优化实践](Engineering/Practice/Vue项目性能优化实践.md)
 - [vite-react-admin项目搭建](Engineering/Practice/vite-react-admin项目搭建.md)
+- [Jest单元测试](Engineering/Practice/Jest单元测试.md)
 
 ### 项目场景(ProjectScene)
 
