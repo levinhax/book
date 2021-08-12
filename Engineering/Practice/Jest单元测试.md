@@ -123,6 +123,13 @@ jest 会自动运行 sum.test.ts 文件，其默认匹配规则:
 1. 匹配 __test__ 文件夹下的 .ts 文件（.jsx .ts .tsx 也可以）
 2. 匹配所有后缀为 .test.ts 或 .spec.ts 的文件（.jsx .ts .tsx 也可以）
 
+## 术语解析
+
+- describe 描述, decribe会形成一个作用域
+- it 断言
+- expect 期望
+- test 测试，类似it
+
 ## 断言函数
 
 jest 提供了 BDD 风格的断言支持，用来验证结果是否正确，下面列出几个常用的:
