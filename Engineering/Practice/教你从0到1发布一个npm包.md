@@ -46,3 +46,39 @@ Email: (this IS public)
 3. 发布包 npm publish --registry=https://registry.npmjs.org
 
 会提示+ eagle-eye-monitor@1.0.0 你的包名字和版本，那么说明就发布好了。
+
+## 本地调试
+
+### 链接
+
+项目和模块不在同一个目录下，需要先把模块链接到全局，然后再在项目中链接模块
+```
+// 先去到模块目录，把它链接到全局
+$ cd path/to/my-module
+$ npm link
+```
+npm link 操作会在全局 node_modules 目录（如 MacOS 默认的是 /usr/local/lib/node_modules）下创建一个 module-name 的超链接
+
+```
+// 再去项目目录
+$ cd path/to/my-project
+// 通过包名建立链接
+$ npm link module-name
+```
+此时只需要指定 module-name，在项目的 node_modules 目录下创建一个 module-name 的超链接，链接到 /usr/local/lib/node_modules/module-name，然后再由全局目录下的超链接，链接到具体的代码目录下。
+
+### 解除链接
+
+解除项目和模块的链接
+```
+// 进入项目目录，解除链接
+$ cd path/to/my-project
+$ npm unlink module-name
+```
+
+解除模块的全局链接
+```
+// 进入模块目录，解除链接
+$ cd path/to/my-module
+$ npm unlink module-name
+```
