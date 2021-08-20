@@ -14,6 +14,7 @@
 ### 实践(Practice)
 
 - [Vue项目性能优化实践](Engineering/Practice/Vue项目性能优化实践.md)
+- [微前端问题记录](Engineering/Practice/微前端问题记录.md)
 - [vite-react-admin项目搭建](Engineering/Practice/vite-react-admin项目搭建.md)
 - [Jest单元测试](Engineering/Practice/Jest单元测试.md)
 - [教你从0到1发布一个npm包](Engineering/Practice/教你从0到1发布一个npm包.md)
