@@ -26,6 +26,7 @@
 - [Vue中复杂表单的验证和数据提交方案](Engineering/ProjectScene/Vue中复杂表单的验证和数据提交方案.md)
 - [大文件分片下载](Engineering/ProjectScene/大文件分片下载.md)
 - [React钩子函数](Engineering/ProjectScene/React钩子函数.md)
+- [记录一次http接口请求延迟问题的排查](Engineering/ProjectScene/记录一次http接口请求延迟问题的排查.md)
 
 ## 编程思想(ProgrammingIdeas)
 
