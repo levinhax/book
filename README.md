@@ -5,9 +5,11 @@
 
 ## 前端(FE)
 
+## 语言(Language)
+
 ### JS
 
-- [手写一个Promise](FE/JS/手写一个Promise.md)
+- [Proxy代理与Reflect反射](Language/JS/Proxy代理与Reflect反射.md)
 
 ## 工程化(Engineering)
 
