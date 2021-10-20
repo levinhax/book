@@ -33,6 +33,7 @@
 ## 编程思想(ProgrammingIdeas)
 
 - [从表单提交看策略模式](ProgrammingIdeas/从表单提交看策略模式.md)
+- [微前端框架qiankun源码笔记](ProgrammingIdeas/微前端框架qiankun源码笔记.md)
 
 ## 计算机基础(Computer)
 
