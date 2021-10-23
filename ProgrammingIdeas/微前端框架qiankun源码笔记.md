@@ -25,6 +25,32 @@ qiankun 是一个基于 single-spa 的微前端实现库，旨在帮助大家能
 4. 应用通信
 5. 应用路由
 
+## 概览
+
+先从src 下的 index.ts 目录，看看 qiankun 对外暴露了那些 API。
+
+```
+export { loadMicroApp, registerMicroApps, start } from './apis';
+export { initGlobalState } from './globalState';
+export { getCurrentRunningApp as __internalGetCurrentRunningApp } from './sandbox';
+export * from './errorHandler';
+export * from './effects';
+export * from './interfaces';
+export { prefetchImmediately as prefetchApps } from './prefetch';
+```
+
+loadMicroApp 用于手动加载微应用，registerMicroApps 用于注册微应用，start 用于启动应用。
+
+initGlobalState 用于设置全局可见的 state。
+
+getCurrentRunningApp 生成应用运行时沙箱。
+
+errorHandler 错误处理。
+
+effects 对外暴露了三个方法，setDefaultMountApp 设置默认加载的微应用，runDefaultMountEffects 是个不推荐使用的方法，内部直接使用 setDefaultMountApp。runAfterFirstMounted 是个对外暴露的生命周期方法，用于注册首个微应用加载之后的回调函数。
+
+prefetchApps 用于应用预加载。
+
 ## 知识点
 
 ### 沙箱
@@ -463,3 +489,11 @@ qiankun一大特点就是将html做为入口文件，规避了JavaScript为了�
 - getExternalScripts: 将模板中所有script标签按照出现的先后顺序，提取出内容，组成一个数组
 - getExternalStyleSheets: 将模板中所有link和style标签按照出现的先后顺序，提取出内容，组成一个数组
 - execScripts: 执行所有的script中的代码，并返回为html模板入口脚本链接entry指向的模块导出对象。
+
+### 清除 js 副作用
+
+子应用在沙箱中使用 window.addEventListener、setInterval 这些需异步监听的全局 api 时，要确保子应用在移除时也要移除对应的监听事件，否则会对其他应用造成副作用。
+
+## 参考
+
+https://zhuanlan.zhihu.com/p/143728194

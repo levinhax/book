@@ -35,6 +35,12 @@
 
 - [从表单提交看策略模式](ProgrammingIdeas/从表单提交看策略模式.md)
 - [微前端框架qiankun源码笔记](ProgrammingIdeas/微前端框架qiankun源码笔记.md)
+- [微前端框架qiankun源码笔记API-注册应用](ProgrammingIdeas/微前端框架qiankun源码笔记API-注册应用.md)
+- [微前端框架qiankun源码笔记-应用间通讯](ProgrammingIdeas/微前端框架qiankun源码笔记-应用间通讯.md)
+- [微前端框架qiankun源码笔记-应用预加载](ProgrammingIdeas/微前端框架qiankun源码笔记-应用预加载.md)
+- [微前端框架qiankun源码笔记-生命周期](ProgrammingIdeas/微前端框架qiankun源码笔记-生命周期.md)
+- [微前端框架qiankun源码笔记-微应用加载流程](ProgrammingIdeas/微前端框架qiankun源码笔记-微应用加载流程.md)
+- [微前端框架qiankun源码笔记-微应用沙箱实现原理](ProgrammingIdeas/微前端框架qiankun源码笔记-微应用沙箱实现原理.md)
 
 ## 计算机基础(Computer)
 
