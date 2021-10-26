@@ -11,6 +11,10 @@
 
 - [Proxy代理与Reflect反射](Language/JS/Proxy代理与Reflect反射.md)
 
+### TS
+
+- [TypeScript之Record](Language/TS/TypeScript之Record.md)
+
 ## 工程化(Engineering)
 
 ### 实践(Practice)
