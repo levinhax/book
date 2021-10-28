@@ -25,6 +25,7 @@ const frameworkStartedDefer = new Deferred<void>();
 
 const autoDowngradeForLowVersionBrowser = (configuration: FrameworkConfiguration): FrameworkConfiguration => {
   const { sandbox, singular } = configuration;
+  // 快照沙箱不支持非 singular 模式
   if (sandbox) {
     if (!window.Proxy) {
       console.warn('[qiankun] Miss window.Proxy, proxySandbox will degenerate into snapshotSandbox');
@@ -220,6 +221,17 @@ export function loadMicroApp<T extends ObjectType>(
 }
 
 export function start(opts: FrameworkConfiguration = {}) {
+  // prefetch 是否开启预加载，默认为 true
+  // 配置为 true 则会在第一个微应用 mount 完成后开始预加载其他微应用的静态资源
+  // 配置为 'all' 则主应用 start 后即开始预加载所有微应用静态资源
+  // 配置为 string[] 则会在第一个微应用 mounted 后开始加载数组内的微应用资源
+  // 配置为 function 则可完全自定义应用的资源加载时机 (首屏应用及次屏应用)
+
+  // singular 是否为单实例场景，单实例指的是同一时间只会渲染一个微应用。默认为 true
+
+  // sandbox 是否开启沙箱，默认为 true
+  // 默认情况下沙箱可以确保单实例场景子应用之间的样式隔离，但是无法确保主应用跟子应用、或者多实例场景的子应用样式隔离。
+  // 当配置为 { strictStyleIsolation: true } 时表示开启严格的样式隔离模式。这种模式下 qiankun 会为每个微应用的容器包裹上一个 shadow dom 节点，从而确保微应用的样式不会对全局造成影响。
   frameworkConfiguration = { prefetch: true, singular: true, sandbox: true, ...opts };
   const {
     prefetch,
@@ -230,9 +242,14 @@ export function start(opts: FrameworkConfiguration = {}) {
   } = frameworkConfiguration;
 
   if (prefetch) {
+    // microApps 所有注册的子应用
+    // importEntryOpts 预加载配置
+
+    // doPrefetchStrategy 预加载的实现，解析 prefetchStrategy 不同的配置，根据配置调用 prefetchImmediately 或者是 prefetchAfterFirstMounted
     doPrefetchStrategy(microApps, prefetch, importEntryOpts);
   }
 
+  // 低版本浏览器的自动降级
   frameworkConfiguration = autoDowngradeForLowVersionBrowser(frameworkConfiguration);
 
   startSingleSpa({ urlRerouteOnly });

@@ -11,9 +11,13 @@ if (process.env.NODE_ENV === 'development') {
 
 export function setDefaultMountApp(defaultAppLink: string) {
   // can not use addEventListener once option for ie support
+  // 增加全局事件监听 no-app-change 
   window.addEventListener('single-spa:no-app-change', function listener() {
+
+    // getMountedApps 获得当前已经 mounted 的应用
     const mountedApps = getMountedApps();
     if (!mountedApps.length) {
+      // 如果一个 mounted 应用都没有，跳转到默认页面
       navigateToUrl(defaultAppLink);
     }
 

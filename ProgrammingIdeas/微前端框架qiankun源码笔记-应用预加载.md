@@ -39,6 +39,7 @@ start 启动应用
 2. sandbox - boolean | { strictStyleIsolation?: boolean } - 可选，是否开启沙箱，默认为 true。当配置为 { strictStyleIsolation: true } 表示开启严格的样式隔离模式。这种模式下 qiankun 会为每个微应用的容器包裹上一个 shadow dom 节点，从而确保微应用的样式不会对全局造成影响。
 3. singular，是否为单实例场景，默认为 true。
 
+src/apis.ts
 ```
 export let frameworkConfiguration: FrameworkConfiguration = {};
 
