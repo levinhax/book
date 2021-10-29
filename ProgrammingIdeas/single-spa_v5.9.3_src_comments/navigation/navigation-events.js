@@ -9,6 +9,7 @@ import { isStarted } from "../start.js";
  * single-spa has ensured that the correct applications are
  * unmounted and mounted.
  */
+// capturedEventListeners 微应用中事件监听的回调函数
 const capturedEventListeners = {
   hashchange: [],
   popstate: [],
@@ -117,6 +118,7 @@ function patchedUpdateState(updateState, methodName) {
   };
 }
 
+// 发生 window.history.pushState 和 window.history.replaceState 事件后，new 一个 popstate 事件对象，传给 urlReroute 函数，模仿了 popstate 事件，这样就能触发相应的监听函数。
 function createPopStateEvent(state, originalMethodName) {
   // https://github.com/single-spa/single-spa/issues/224 and https://github.com/single-spa/single-spa-angular/issues/49
   // We need a popstate event even though the browser doesn't do one by default when you call replaceState, so that
@@ -138,23 +140,33 @@ function createPopStateEvent(state, originalMethodName) {
 
 if (isInBrowser) {
   // We will trigger an app change for any routing events.
+
+  // urlReroute 就是 reroute 方法的带参数版本
   window.addEventListener("hashchange", urlReroute);
   window.addEventListener("popstate", urlReroute);
 
   // Monkeypatch addEventListener so that we can ensure correct timing
+  // 重写 window.addEventListener 和 window.removeEventListener 方法，重写之前把原先的事件做个备份
   const originalAddEventListener = window.addEventListener;
   const originalRemoveEventListener = window.removeEventListener;
   window.addEventListener = function (eventName, fn) {
     if (typeof fn === "function") {
+      // 如果用户监听的是 hashchange 和 popstate 事件，并且这个监听器此前未加入事件监听列表
+      // 那这个事件时有可能引发应用变更的，需要加入 capturedEventListeners 中
+      // 直接 return 掉，说明 hashchange 和 popstate 事件并没有马上执行
+      // 而是在执行完 reroute 逻辑之后在执行
+      // export const routingEventsListeningTo = ["hashchange", "popstate"];
       if (
         routingEventsListeningTo.indexOf(eventName) >= 0 &&
         !find(capturedEventListeners[eventName], (listener) => listener === fn)
       ) {
+        // 将这个回调加入 capturedEventListeners 中
         capturedEventListeners[eventName].push(fn);
         return;
       }
     }
 
+    // 原生的监听事件
     return originalAddEventListener.apply(this, arguments);
   };
 
@@ -171,6 +183,7 @@ if (isInBrowser) {
     return originalRemoveEventListener.apply(this, arguments);
   };
 
+  // 加强 pushState 方法，使其能触发 popstate 事件
   window.history.pushState = patchedUpdateState(
     window.history.pushState,
     "pushState"

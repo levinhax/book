@@ -7,6 +7,7 @@ import {
 import { reasonableTime } from "../applications/timeouts.js";
 import { handleAppError, transformErr } from "../applications/app-errors.js";
 
+// toBootstrapPromise 方法，判断了状态是否正确，执行了应用生命周期函数 bootstrap 方法
 export function toBootstrapPromise(appOrParcel, hardFail) {
   return Promise.resolve().then(() => {
     if (appOrParcel.status !== NOT_BOOTSTRAPPED) {

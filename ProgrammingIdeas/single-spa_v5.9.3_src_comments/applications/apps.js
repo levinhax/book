@@ -35,16 +35,21 @@ export function getAppChanges() {
   // We re-attempt to download applications in LOAD_ERROR after a timeout of 200 milliseconds
   const currentTime = new Date().getTime();
 
+  // apps 存储了注册的应用
+  // apps 的 status 注册的初值是 NOT_LOADED,
   apps.forEach((app) => {
+    // appShouldBeActive 表示应用和当前路径匹配，应当加载
     const appShouldBeActive =
       app.status !== SKIP_BECAUSE_BROKEN && shouldBeActive(app);
 
     switch (app.status) {
+      // LOAD_ERROR 但是时间没有超过 200 ms，放入 appsToLoad 数组中，准备重试
       case LOAD_ERROR:
         if (appShouldBeActive && currentTime - app.loadErrorTime >= 200) {
           appsToLoad.push(app);
         }
         break;
+      // 未加载但是根据路径判断应当激活，放入 appsToLoad 数组
       case NOT_LOADED:
       case LOADING_SOURCE_CODE:
         if (appShouldBeActive) {
@@ -56,9 +61,12 @@ export function getAppChanges() {
         if (!appShouldBeActive && getAppUnloadInfo(toName(app))) {
           appsToUnload.push(app);
         } else if (appShouldBeActive) {
+          // 等待 mount
           appsToMount.push(app);
         }
         break;
+      // 已经加载的，但是当前路径变了，放入 appsToUnmount 数组
+      // shouldBeActive 函数判断 app 是否应当激活，判断的原则是根据 activeWhen 方法进行匹配
       case MOUNTED:
         if (!appShouldBeActive) {
           appsToUnmount.push(app);
@@ -140,7 +148,7 @@ export function registerApplication(
   if (isInBrowser) {
     ensureJQuerySupport();
 
-    // 重新触发路由
+    // reroute 是 single-spa 的核心，更新微应用的状态，触发微应用的生命周期函数，并发出一系列自定义事件。
     reroute();
   }
 }

@@ -3,6 +3,7 @@ import { getProps } from "../lifecycles/prop.helpers";
 import { objectType, toName } from "./app.helpers";
 import { formatErrorMessage } from "./app-errors";
 
+// 将全局的 timeouts 配置 assign 到应用的 timeouts 属性上。这里配置的生命周期函数执行的时间，millis 表示生命周期函数最多执行这么多时间，超出时间就会标错，warningMillis 表示执行每过这么久，就打印 warning。
 const defaultWarningMillis = 1000;
 
 const globalTimeoutConfig = {
@@ -105,6 +106,7 @@ export function setUnloadMaxTime(time, dieOnTimeout, warningMillis) {
   };
 }
 
+// reasonableTime 执行 app 的生命周期方法，超过规定的警告时间后会打印 warning，超过规定的报错时间会打印 error，根据默认配置，打印错误并不会使代码停止执行，这里仅仅用做提示。
 export function reasonableTime(appOrParcel, lifecycle) {
   const timeoutConfig = appOrParcel.timeouts[lifecycle];
   const warningPeriod = timeoutConfig.warningMillis;

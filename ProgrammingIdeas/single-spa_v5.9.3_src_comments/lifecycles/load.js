@@ -20,6 +20,7 @@ import {
 import { getProps } from "./prop.helpers.js";
 import { assign } from "../utils/assign.js";
 
+// toLoadPromise 这个方法比较关键，当前 url 和 app 匹配，需要加载这个微应用，执行 app 上的 loadApp 方法（qiankun 实现了这个方法），校验改方法的返回值，校验 app 上的生命周期函数供后续调用。
 export function toLoadPromise(app) {
   return Promise.resolve().then(() => {
     if (app.loadPromise) {

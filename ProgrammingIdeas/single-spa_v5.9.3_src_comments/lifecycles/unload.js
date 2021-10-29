@@ -21,14 +21,17 @@ export function toUnloadPromise(app) {
       return app;
     }
 
+    // app 已经执行过 unload 操作
     if (app.status === NOT_LOADED) {
       /* This app is already unloaded. We just need to clean up
        * anything that still thinks we need to unload the app.
        */
+      // 结束 unload 操作，表示该 app 已经卸载
       finishUnloadingApp(app, unloadInfo);
       return app;
     }
 
+    // 已经有其它地方调用了这 unload 操作
     if (app.status === UNLOADING) {
       /* Both unloadApplication and reroute want to unload this app.
        * It only needs to be done once, though.
@@ -49,6 +52,7 @@ export function toUnloadPromise(app) {
 
     app.status = UNLOADING;
 
+    // 执行生命周期函数 unload
     return unloadPromise
       .then(() => {
         finishUnloadingApp(app, unloadInfo);
