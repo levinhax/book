@@ -39,6 +39,16 @@ export function createSandboxContainer(
   globalContext?: typeof window,
 ) {
   let sandbox: SandBox;
+  // sandbox 创建方式不同。
+  // ProxySandbox 本质是通过 Proxy 的方式创建了一个 fakeWindow 对象。
+  // sandbox 的数据结构是
+  //{
+  //   name: string;
+  //   proxy: WindowProxy;
+  //   sandboxRunning = true;
+  //   active() 
+  //   inactive() 
+  //}
   if (window.Proxy) {
     sandbox = useLooseSandbox ? new LegacySandbox(appName, globalContext) : new ProxySandbox(appName, globalContext);
   } else {

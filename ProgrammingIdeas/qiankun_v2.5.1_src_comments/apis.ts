@@ -86,6 +86,8 @@ export function registerMicroApps<T extends ObjectType>(
         await frameworkStartedDefer.promise;
 
         // 获得 app 的配置
+        // loadApp 会返回微应用的一些配置和生命周期函数，这些生命周期函数由 signle-spa 控制调用。
+        // qiankun 可以配置 beforeLoad，beforeMount，afterMount，beforeUnmount，afterUnmount 这五个生命周期函数
         const { mount, ...otherMicroAppConfigs } = (
           await loadApp({ name, props, ...appConfig }, frameworkConfiguration, lifeCycles)
         )();
