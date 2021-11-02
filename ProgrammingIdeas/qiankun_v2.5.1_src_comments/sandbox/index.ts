@@ -49,9 +49,13 @@ export function createSandboxContainer(
   //   active() 
   //   inactive() 
   //}
+  // 如果一个页面上有多个微前端应用，使用 ProxySandbox，否则使用 LegacySandbox。如果不支持 Proxy，使用 SnapshotSandbox。
   if (window.Proxy) {
+    // LegacySandbox 基于 Proxy 实现的沙箱，为了兼容性 singular 模式下依旧使用该沙箱，等新沙箱稳定之后再切换
+    // ProxySandbox 基于 Proxy 实现的沙箱
     sandbox = useLooseSandbox ? new LegacySandbox(appName, globalContext) : new ProxySandbox(appName, globalContext);
   } else {
+    // SnapshotSandbox 基于 diff 方式实现的沙箱，用于不支持 Proxy 的低版本浏览器
     sandbox = new SnapshotSandbox(appName);
   }
 

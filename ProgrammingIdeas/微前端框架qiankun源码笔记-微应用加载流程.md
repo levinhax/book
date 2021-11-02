@@ -363,16 +363,17 @@ function getAppWrapperGetter(
 }
 ```
 
-createSandbox 是创建隔离环境的代码。
+createSandboxContainer 是在 loadApp 的时候执行的。返回值中包含 mount 和 unmount 两个函数，分别在微应用 mount 和 unmount 生命周期执行。
 ```
-export function createSandbox(appName: string, elementGetter: () => HTMLElement | ShadowRoot, singular: boolean) {
-  // mounting freers are one-off and should be re-init at every mounting time
-  let mountingFreers: Freer[] = [];
-
-  let sideEffectsRebuilders: Rebuilder[] = [];
-
+export function createSandboxContainer(
+  appName: string,
+  elementGetter: () => HTMLElement | ShadowRoot,
+  scopedCSS: boolean,
+  useLooseSandbox?: boolean,
+  excludeAssetFilter?: (url: string) => boolean,
+  globalContext?: typeof window,
+) {
   let sandbox: SandBox;
-
   // sandbox 创建方式不同。
   // ProxySandbox 本质是通过 Proxy 的方式创建了一个 fakeWindow 对象。
   // sandbox 的数据结构是
@@ -384,16 +385,23 @@ export function createSandbox(appName: string, elementGetter: () => HTMLElement 
   //   inactive() 
   //}
   if (window.Proxy) {
-    sandbox = singular ? new LegacySandbox(appName) : new ProxySandbox(appName);
+    // LegacySandbox 基于 Proxy 实现的沙箱，为了兼容性 singular 模式下依旧使用该沙箱，等新沙箱稳定之后再切换
+    // ProxySandbox 基于 Proxy 实现的沙箱
+    sandbox = useLooseSandbox ? new LegacySandbox(appName, globalContext) : new ProxySandbox(appName, globalContext);
   } else {
+    // SnapshotSandbox 基于 diff 方式实现的沙箱，用于不支持 Proxy 的低版本浏览器
     sandbox = new SnapshotSandbox(appName);
   }
 
   // some side effect could be be invoked while bootstrapping, such as dynamic stylesheet injection with style-loader, especially during the development phase
-  const bootstrappingFreers = patchAtBootstrapping(appName, elementGetter, sandbox.proxy, singular);
+  const bootstrappingFreers = patchAtBootstrapping(appName, elementGetter, sandbox, scopedCSS, excludeAssetFilter);
+  // mounting freers are one-off and should be re-init at every mounting time
+  let mountingFreers: Freer[] = [];
+
+  let sideEffectsRebuilders: Rebuilder[] = [];
 
   return {
-    proxy: sandbox.proxy,
+    instance: sandbox,
 
     /**
      * 沙箱被 mount
@@ -401,27 +409,27 @@ export function createSandbox(appName: string, elementGetter: () => HTMLElement 
      * 也可能是从 unmount 之后再次唤醒进入 mount
      */
     async mount() {
+      /* ------------------------------------------ 因为有上下文依赖（window），以下代码执行顺序不能变 ------------------------------------------ */
+
+      /* ------------------------------------------ 1. 启动/恢复 沙箱------------------------------------------ */
+      sandbox.active();
+
       const sideEffectsRebuildersAtBootstrapping = sideEffectsRebuilders.slice(0, bootstrappingFreers.length);
       const sideEffectsRebuildersAtMounting = sideEffectsRebuilders.slice(bootstrappingFreers.length);
 
       // must rebuild the side effects which added at bootstrapping firstly to recovery to nature state
       if (sideEffectsRebuildersAtBootstrapping.length) {
-        sideEffectsRebuildersAtBootstrapping.forEach(rebuild => rebuild());
+        sideEffectsRebuildersAtBootstrapping.forEach((rebuild) => rebuild());
       }
 
-      /* ------------ 因为有上下文依赖（window），以下代码执行顺序不能变 -------------- */
-
-      /* ------------ 1. 启动/恢复 沙箱 ------------  */
-      sandbox.active();
-
-      /* ------------  2. 开启全局变量补丁 ------------ */
+      /* ------------------------------------------ 2. 开启全局变量补丁 ------------------------------------------*/
       // render 沙箱启动时开始劫持各类全局监听，尽量不要在应用初始化阶段有 事件监听/定时器 等副作用
-      mountingFreers = patchAtMounting(appName, elementGetter, sandbox.proxy, singular);
+      mountingFreers = patchAtMounting(appName, elementGetter, sandbox, scopedCSS, excludeAssetFilter);
 
-      /* ------------  3. 重置一些初始化时的副作用 ------------ */
+      /* ------------------------------------------ 3. 重置一些初始化时的副作用 ------------------------------------------*/
       // 存在 rebuilder 则表明有些副作用需要重建
       if (sideEffectsRebuildersAtMounting.length) {
-        sideEffectsRebuildersAtMounting.forEach(rebuild => rebuild());
+        sideEffectsRebuildersAtMounting.forEach((rebuild) => rebuild());
       }
 
       // clean up rebuilders
@@ -434,7 +442,7 @@ export function createSandbox(appName: string, elementGetter: () => HTMLElement 
     async unmount() {
       // record the rebuilders of window side effects (event listeners or timers)
       // note that the frees of mounting phase are one-off as it will be re-init at next mounting
-      sideEffectsRebuilders = [...bootstrappingFreers, ...mountingFreers].map(free => free());
+      sideEffectsRebuilders = [...bootstrappingFreers, ...mountingFreers].map((free) => free());
 
       sandbox.inactive();
     },

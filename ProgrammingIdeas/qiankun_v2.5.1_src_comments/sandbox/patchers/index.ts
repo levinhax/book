@@ -42,6 +42,7 @@ export function patchAtMounting(
   return patchersInSandbox[sandbox.type]?.map((patch) => patch());
 }
 
+// 对 document.createElement，HTML DOM appendChild，HTML DOM removeChild，HTML DOM insertBefore 做处理，以便 style 和 script 能顺利的挂载到微应用下面
 export function patchAtBootstrapping(
   appName: string,
   elementGetter: () => HTMLElement | ShadowRoot,

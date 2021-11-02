@@ -97,6 +97,7 @@ export function patchStrictSandbox(
     proxyAttachContainerConfigMap.set(proxy, containerConfig);
   }
   // all dynamic style sheets are stored in proxy container
+  // 动态样式表
   const { dynamicStyleSheetElements } = containerConfig;
 
   const unpatchDocumentCreate = patchDocumentCreateElement();

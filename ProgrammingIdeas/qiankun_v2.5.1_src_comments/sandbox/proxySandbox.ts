@@ -66,6 +66,7 @@ const useNativeWindowForBindingsProps = new Map<PropertyKey, boolean>([
   ['mockDomAPIInBlackList', process.env.NODE_ENV === 'test'],
 ]);
 
+// createFakeWindow 的入参是一个 window 对象，返回值是 window 对象的 proxy。
 function createFakeWindow(globalContext: Window) {
   // map always has the fastest performance in has check scenario
   // see https://jsperf.com/array-indexof-vs-set-has/23
@@ -77,9 +78,15 @@ function createFakeWindow(globalContext: Window) {
    see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/getOwnPropertyDescriptor
    > A property cannot be reported as non-configurable, if it does not exists as an own property of the target object or if it exists as a configurable own property of the target object.
    */
+  // Object.getOwnPropertyNames()方法返回一个由指定对象的所有自身属性的属性名
+  // 包括不可枚举属性但不包括Symbol值作为名称的属性组成的数组。
   Object.getOwnPropertyNames(globalContext)
+    // 找到 window 对象中不可改变或不可删除的属性
     .filter((p) => {
+      // Object.getOwnPropertyDescriptor() 方法返回指定对象上一个自有属性对应的属性描述符。
+      // 自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性
       const descriptor = Object.getOwnPropertyDescriptor(globalContext, p);
+      // configurable 当且仅当指定对象的属性描述可以被改变或者属性可被删除时，为true
       return !descriptor?.configurable;
     })
     .forEach((p) => {
@@ -92,6 +99,7 @@ function createFakeWindow(globalContext: Window) {
          see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/get
          > The value reported for a property must be the same as the value of the corresponding target object property if the target object property is a non-writable, non-configurable data property.
          */
+        // 这些属性中找到 top self window 属性，将其配置为 configurable
         if (
           p === 'top' ||
           p === 'parent' ||
@@ -106,6 +114,7 @@ function createFakeWindow(globalContext: Window) {
             Safari/FF: Object.getOwnPropertyDescriptor(window, 'top') -> {get: function, set: undefined, enumerable: true, configurable: false}
             Chrome: Object.getOwnPropertyDescriptor(window, 'top') -> {value: Window, writable: false, enumerable: true, configurable: false}
            */
+          // 如果 descriptor 有 get 方法，将 descriptor 设置为 writable
           if (!hasGetter) {
             descriptor.writable = true;
           }
@@ -115,6 +124,9 @@ function createFakeWindow(globalContext: Window) {
 
         // freeze the descriptor to avoid being modified by zone.js
         // see https://github.com/angular/zone.js/blob/a5fe09b0fac27ac5df1fa746042f96f05ccb6a00/lib/browser/define-property.ts#L71
+        // freeze the descriptor to avoid being modified by zone.js
+        // const rawObjectDefineProperty = Object.defineProperty;
+        // fakeWindow 中放置这些属性
         rawObjectDefineProperty(fakeWindow, p, Object.freeze(descriptor));
       }
     });
@@ -158,11 +170,14 @@ export default class ProxySandbox implements SandBox {
     }
   }
 
+  // 激活方法
+  // activeSandboxCount 是全局变量，表示当前激活的沙盒的数量
   active() {
     if (!this.sandboxRunning) activeSandboxCount++;
     this.sandboxRunning = true;
   }
 
+  // 关闭沙盒
   inactive() {
     if (process.env.NODE_ENV === 'development') {
       console.info(`[qiankun:sandbox] ${this.name} modified global properties restore...`, [
@@ -188,14 +203,17 @@ export default class ProxySandbox implements SandBox {
     this.type = SandBoxType.Proxy;
     const { updatedValueSet } = this;
 
+    // 处理 window 中不可编辑或不可删除的属性
     const { fakeWindow, propertiesWithGetter } = createFakeWindow(globalContext);
 
     const descriptorTargetMap = new Map<PropertyKey, SymbolTarget>();
     const hasOwnProperty = (key: PropertyKey) => fakeWindow.hasOwnProperty(key) || globalContext.hasOwnProperty(key);
 
+    // 定义 proxy 的 set get 等方法
     const proxy = new Proxy(fakeWindow, {
       set: (target: FakeWindow, p: PropertyKey, value: any): boolean => {
         if (this.sandboxRunning) {
+          // 调用 set 方法的时候，除了对象上多一个属性，还会在 updatedValueSet 中保存一个 key
           this.registerRunningApp(name, proxy);
           // We must kept its description while the property existed in globalContext before
           if (!target.hasOwnProperty(p) && globalContext.hasOwnProperty(p)) {
@@ -240,6 +258,7 @@ export default class ProxySandbox implements SandBox {
         if (p === Symbol.unscopables) return unscopables;
         // avoid who using window.window or window.self to escape the sandbox environment to touch the really window
         // see https://github.com/eligrey/FileSaver.js/blob/master/src/FileSaver.js#L13
+        // 使用 get 获得 top，window，self 的都会获得 proxy 本身
         if (p === 'window' || p === 'self') {
           return proxy;
         }
@@ -262,6 +281,7 @@ export default class ProxySandbox implements SandBox {
         }
 
         // proxy.hasOwnProperty would invoke getter firstly, then its value represented as globalContext.hasOwnProperty
+        // hasOwnProperty 同时判断 target(proxy) 和 rawWindow(window)
         if (p === 'hasOwnProperty') {
           return hasOwnProperty;
         }
@@ -341,6 +361,7 @@ export default class ProxySandbox implements SandBox {
 
       deleteProperty: (target: FakeWindow, p: string | number | symbol): boolean => {
         this.registerRunningApp(name, proxy);
+        // 肯定不会删除 window 上的，只会删除 proxy 上的
         if (target.hasOwnProperty(p)) {
           // @ts-ignore
           delete target[p];
