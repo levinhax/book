@@ -10,9 +10,10 @@
 
 首先创建一个 react 项目
 ```
-npm init vite@latest debug-react -- --template react
+npx create-react-app debug-react // 官方脚手架
 
-// npx create-react-app debug-react // 官方脚手架
+// npm init vite@latest debug-react -- --template react
+// yarn create vite debug-react --template react
 ```
 
 ## 暴露 webpack 配置
@@ -198,6 +199,97 @@ module.exports = {
   ]
 }
 ```
+
+# 使用yarn link调试源码
+
+克隆 React 项目后，执行 yarn 来获取依赖。
+
+我们建议运行 yarn test（或上述命令）以确保你的代码没有引入回归，不管怎样，这有助于尝试你的 React 构建版本。
+
+首先，运行 yarn build，这会于 build 文件夹中生成预先构建的 bundle，还会于 build/packages 中生成 npm 包。
+
+```
+cd ~/path_to_your_react_clone/
+# yarn build react/index,react/jsx,react-dom/index,scheduler --type=NODE
+npm run build react/index,react/jsx,react-dom/index,scheduler --type=NODE
+
+cd build/node_modules/react
+# yarn link
+npm link
+cd build/node_modules/react-dom
+# yarn link
+npm link
+
+cd ~/path/to/your/project
+# yarn link react react-dom
+npm link react react-dom
+```
+
+每当你在项目文件夹下运行 yarn build，更新版本会出现在 node_modules 文件夹，之后可以重新构建项目来测试更改。
+
+如果依然缺少某些 package（例如，可能在项目中使用到 react-dom/server），则应始终执行 yarn build 进行完整构建。请注意，不带选项运行 yarn build 会耗费很长时间。
+
+* yarn命令如果有问题可改为npm *
+
+**最后使用 yarn unlink react 移除链接， 移除后需要重新安装该库。**
+
+## 开始调试
+
+1. 打开我们clone的项目
+2. 找到想要调试的地方
+
+如: packages/react-dom/src/client/ReactDOMLegacy.js
+```
+export function render(
+  element: React$Element<any>,
+  container: Container,
+  callback: ?Function,
+) {
+  console.log('react v17.0.2 debug --> render');
+  if (__DEV__) {
+    console.error(
+      'ReactDOM.render is no longer supported in React 18. Use createRoot ' +
+        'instead. Until you switch to the new API, your app will behave as ' +
+        "if it's running React 17. Learn " +
+        'more: https://reactjs.org/link/switch-to-createroot',
+    );
+  }
+
+  if (!isValidContainerLegacy(container)) {
+    throw new Error('Target container is not a DOM element.');
+  }
+
+  if (__DEV__) {
+    const isModernRoot =
+      isContainerMarkedAsRoot(container) &&
+      container._reactRootContainer === undefined;
+    if (isModernRoot) {
+      console.error(
+        'You are calling ReactDOM.render() on a container that was previously ' +
+          'passed to ReactDOM.createRoot(). This is not supported. ' +
+          'Did you mean to call root.render(element)?',
+      );
+    }
+  }
+  return legacyRenderSubtreeIntoContainer(
+    null,
+    element,
+    container,
+    false,
+    callback,
+  );
+}
+```
+
+3. 运行yarn build react/index,react/jsx,react-dom/index,scheduler --type=NODE (npm run build react/index,react/jsx,react-dom/index,scheduler --type=NODE)重新打包
+4. 打开我们创建的React项目
+5. yarn start
+6. 查看控制台
+
+**每次修改源代码都需要:**
+
+1. 运行 yarn build react/index,react/jsx,react-dom/index,scheduler --type=NODE (npm run build react/index,react/jsx,react-dom/index,scheduler --type=NODE) 重新打包
+2. 刷新页面
 
 # 总结
 
