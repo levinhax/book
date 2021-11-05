@@ -12,6 +12,8 @@
 - [Proxy代理与Reflect反射](Language/JS/Proxy代理与Reflect反射.md)
 - [CommonJS、AMD、CMD、UMD、ES Module模块](Language/JS/CommonJS、AMD、CMD、UMD、ES%20Module模块.md)
 - [dispatchEvent](Language/JS/dispatchEvent.md)
+- [跨站请求伪造-CSRF](Language/JS/跨站请求伪造-CSRF.md)
+- [web安全之XSS攻击](Language/JS/web安全之XSS攻击.md)
 
 ### TS
 
