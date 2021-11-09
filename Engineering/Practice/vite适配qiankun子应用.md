@@ -15,6 +15,7 @@ yarn add vite-plugin-qiankun path --dev
 1. 在vite.config.ts中，加入如下代码:
 
 ```
+import { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import qiankun from 'vite-plugin-qiankun'
@@ -22,9 +23,8 @@ import qiankun from 'vite-plugin-qiankun'
 // useDevMode 开启时与热更新插件冲突,使用变量切换
 const useDevMode = true
 
-export default defineConfig({
+const baseConfig: UserConfig = {
   plugins: [
-    ...内容省略,
     // react(),
     ...(
       useDevMode ? [] : [
@@ -35,20 +35,37 @@ export default defineConfig({
     // useDevMode = true 则不使用热更新插件，useDevMode = false 则能使用热更新，但无法作为子应用加载。
     qiankun('MICRO3_React_APP_VITE', { useDevMode }),
   ],
-  // 生产环境需要指定运行域名作为base
-  base: 'http://xxx.com/',
   server: {
     port: 9003,
     // open: true,
     proxy: {
-			'/api': 'http://localhost:3001',
+      '/api': 'http://localhost:3001',
       '/api/test': {
         changeOrigin: true,
         target: 'http://10.11.32.173:8080/',
         rewrite: (path) => path.replace(/^\/api\/test/, '')
       }
-		}
+    }
   },
+}
+
+export default defineConfig(({ command, mode }) => {
+  // console.log('command, mode: ', command, mode)
+  // if (command === 'serve') {
+  //   return {
+  //     // serve 独有配置
+  //   }
+  // } else {
+  //   return {
+  //     // build 独有配置
+  //   }
+  // }
+
+  baseConfig.base = 'http://127.0.0.1:9003/';
+  if (mode === 'development') {
+    baseConfig.base = '/';
+  }
+  return baseConfig;
 })
 ```
 
