@@ -61,7 +61,7 @@ export default defineConfig(({ command, mode }) => {
   //   }
   // }
 
-  baseConfig.base = 'http://127.0.0.1:9003/';
+  baseConfig.base = 'http://127.0.0.1/child/micro3/';
   if (mode === 'development') {
     baseConfig.base = '/';
   }
