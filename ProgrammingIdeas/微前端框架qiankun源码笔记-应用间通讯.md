@@ -27,6 +27,13 @@ export function initGlobalState(state: Record<string, any> = {}) {
 ```
 
 deps 对象中存储了所有的监听器，key 代表应用的唯一标识，value 则是回到函数。emitGloabl 方法就是遍历 deps 对象，依次触发回调函数。
+
+src/interfaces.ts
+```
+export type OnGlobalStateChangeCallback = (state: Record<string, any>, prevState: Record<string, any>) => void;
+```
+
+src/globalState.ts
 ```
 // deps 中注册了全局监听器
 const deps: Record<string, OnGlobalStateChangeCallback> = {};

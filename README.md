@@ -32,6 +32,8 @@
 - [教你从0到1发布一个npm包](Engineering/Practice/教你从0到1发布一个npm包.md)
 - [前端监控平台](Engineering/Practice/前端监控平台.md)
 - [vite适配qiankun子应用](Engineering/Practice/vite适配qiankun子应用.md)
+- [使用gitlabCI/CD完成前端自动化部署](Engineering/Practice/使用gitlabCI/CD完成前端自动化部署.md)
+- [构建自己的脚手架](Engineering/Practice/构建自己的脚手架.md)
 
 ### 项目场景(ProjectScene)
 
