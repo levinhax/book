@@ -74,6 +74,10 @@
 
 - [跨域的9种解决方式](Computer/Internet/跨域的9种解决方式.md)
 
+### Nginx(Nginx)
+
+- [前端需要了解的Nginx知识](Computer/Nginx/前端需要了解的Nginx知识.md)
+
 ## 源码(SourceCode)
 
 ### react
