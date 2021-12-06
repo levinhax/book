@@ -23,6 +23,9 @@
 
 ### JS
 
+- [ES6+系列](Language/JS/ES6+系列.md)
+- [原型](Language/JS/原型.md)
+- [继承](Language/JS/继承.md)
 - [Proxy代理与Reflect反射](Language/JS/Proxy代理与Reflect反射.md)
 - [CommonJS、AMD、CMD、UMD、ES Module模块](Language/JS/CommonJS、AMD、CMD、UMD、ES%20Module模块.md)
 - [dispatchEvent](Language/JS/dispatchEvent.md)
