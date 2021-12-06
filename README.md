@@ -90,6 +90,10 @@
 
 - [前端需要了解的Nginx知识](Computer/Nginx/前端需要了解的Nginx知识.md)
 
+### Git(Git)
+
+- [git撤销commit](Computer/Git/git撤销commit.md)
+
 ## 源码(SourceCode)
 
 ### react
