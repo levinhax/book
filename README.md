@@ -56,6 +56,7 @@
 - [iframe传参](Engineering/ProjectScene/iframe传参.md)
 - [SVG中linearGradient渐变在直线上失效的问题](Engineering/ProjectScene/SVG中linearGradient渐变在直线上失效的问题.md)
 - [vue中使用echart在tooltip上添加点击事件](Engineering/ProjectScene/vue中使用echart在tooltip上添加点击事件.md)
+- [动效背景使用mp4替代gif](Engineering/ProjectScene/动效背景使用mp4替代gif.md)
 
 ## 编程思想(ProgrammingIdeas)
 
