@@ -13,6 +13,7 @@
 - [Canvas动画](Language/HTML/Canvas动画.md)
 - [canvas绘制进度条](Language/HTML/canvas绘制进度条.md)
 - [Canvas性能优化](Language/HTML/Canvas性能优化.md)
+- [服务器发送事件SSE](Language/HTML/服务器发送事件SSE.md)
 
 ### JS
 
