@@ -7,6 +7,12 @@
 
 ## 语言(Language)
 
+### HTML
+
+- [Canvas常用API汇总](Language/HTML/Canvas常用API汇总.md)
+- [Canvas动画](Language/HTML/Canvas动画.md)
+- [canvas绘制进度条](Language/HTML/canvas绘制进度条.md)
+
 ### JS
 
 - [Proxy代理与Reflect反射](Language/JS/Proxy代理与Reflect反射.md)
