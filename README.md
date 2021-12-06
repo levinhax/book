@@ -73,6 +73,7 @@
 ### 数据结构(DataStructure)
 
 - [栈](Computer/DataStructure/栈.md)
+- [队列](Computer/DataStructure/队列.md)
 
 ### 算法(Algorithm)
 
