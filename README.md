@@ -35,6 +35,8 @@
 ### TS
 
 - [TypeScript之Record](Language/TS/TypeScript之Record.md)
+- [泛型](Language/TS/泛型.md)
+- [TypeScript结合React全家桶的一些类型总结](Language/TS/TypeScript结合React全家桶的一些类型总结.md)
 
 ## 工程化(Engineering)
 
