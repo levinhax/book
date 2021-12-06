@@ -74,6 +74,8 @@
 
 - [栈](Computer/DataStructure/栈.md)
 - [队列](Computer/DataStructure/队列.md)
+- [链表](Computer/DataStructure/链表.md)
+- [双向链表](Computer/DataStructure/双向链表.md)
 
 ### 算法(Algorithm)
 
