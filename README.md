@@ -16,6 +16,7 @@
 - [web安全之XSS攻击](Language/JS/web安全之XSS攻击.md)
 - [Event Loop事件循环](Language/JS/Event%20Loop事件循环.md)
 - [Promise的源码实现](Language/JS/Promise的源码实现.md)
+- [手写-compose函数](Language/JS/手写-compose函数.md)
 
 ### TS
 
