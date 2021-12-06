@@ -58,6 +58,7 @@
 - [微前端框架qiankun源码笔记-生命周期](ProgrammingIdeas/微前端框架qiankun源码笔记-生命周期.md)
 - [微前端框架qiankun源码笔记-微应用加载流程](ProgrammingIdeas/微前端框架qiankun源码笔记-微应用加载流程.md)
 - [微前端框架qiankun源码笔记-微应用沙箱实现原理](ProgrammingIdeas/微前端框架qiankun源码笔记-微应用沙箱实现原理.md)
+- [手写-发布订阅模式](ProgrammingIdeas/手写-发布订阅模式.md)
 
 ## 计算机基础(Computer)
 
