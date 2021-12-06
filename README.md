@@ -106,6 +106,7 @@
 - [扁平数据结构转Tree](Computer/Algorithm/扁平数据结构转Tree.md)
 - [排序算法](Computer/Algorithm/排序算法.md)
 - [二分查找](Computer/Algorithm/二分查找.md)
+- [树形结构与列表互转](Computer/Algorithm/树形结构与列表互转.md)
 
 ### 网络与浏览器(Internet)
 
