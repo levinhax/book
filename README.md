@@ -53,6 +53,7 @@
 - [性能优化2-优化渲染过程](Engineering/Practice/性能优化2-优化渲染过程.md)
 - [性能优化3-文件优化](Engineering/Practice/性能优化3-文件优化.md)
 - [性能优化4-其他](Engineering/Practice/性能优化4-其他.md)
+- [使用者体验量化Web Vitals](Engineering/Practice/使用者体验量化Web%20Vitals.md)
 
 ### 项目场景(ProjectScene)
 
