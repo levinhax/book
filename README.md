@@ -47,6 +47,7 @@
 - [Win10系统关闭某个端口的服务](Engineering/ProjectScene/Win10系统关闭某个端口的服务.md)
 - [使用JSON.stringify将js文件转化为json文件](Engineering/ProjectScene/使用JSON.stringify将js文件转化为json文件.md)
 - [iframe传参](Engineering/ProjectScene/iframe传参.md)
+- [SVG中linearGradient渐变在直线上失效的问题](Engineering/ProjectScene/SVG中linearGradient渐变在直线上失效的问题.md)
 
 ## 编程思想(ProgrammingIdeas)
 
