@@ -87,6 +87,10 @@
 
 - [React与Vue的常用点对比](Library/React/React与Vue的常用点对比.md)
 
+### Python
+
+- [提取pdf中的图片](Library/Python/提取pdf中的图片.md)
+
 ## 编程思想(ProgrammingIdeas)
 
 - [从表单提交看策略模式](ProgrammingIdeas/从表单提交看策略模式.md)
