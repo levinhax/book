@@ -191,10 +191,10 @@ docker image build -t [镜像名称] . // -t ：指定要创建的目标镜像�
 docker ps -a 容器列表(所有容器)
 docker ps  查看所有(运行的)容器
 docker exec -it <id> /bin/bash   // 以 bash 命令进入容器内
-docker run -it --name [容器名称][镜像名称:版本] bash  // 启动容器并进入
+docker run -it --name [容器名称][镜像名称:版本] /bin/bash  // 启动容器并进入
 docker logs 查看容器日志
 docker top <container_id> 查看容器最近的一个进程
-docker run -it --name [容器名称] -p 8080:80 [镜像名称:版本] bash  端口映射
+docker run -it --name [容器名称] -p 8080:80 [镜像名称:版本] /bin/bash  端口映射
 docker rm <container_id> 删除容器
 docker stop <container_id> 停止容器
 docker start <container_id> 开启容器
