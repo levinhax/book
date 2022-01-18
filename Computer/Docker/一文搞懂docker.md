@@ -104,7 +104,7 @@ docker pull nginx
 启动容器，端口映射通过-P和-p参数来实现
 
 ```
-docker run --name nginx -p 80:80 -d nginx
+docker run --name mynginx -p 80:80 -d nginx
 ```
 
 nginx镜像配置文件： /etc/nginx/conf.d/default.conf、 /usr/share/nginx/html
@@ -191,10 +191,10 @@ docker image build -t [镜像名称] . // -t ：指定要创建的目标镜像�
 docker ps -a 容器列表(所有容器)
 docker ps  查看所有(运行的)容器
 docker exec -it <id> /bin/bash   // 以 bash 命令进入容器内
-docker run -it --name [容器名称][镜像名称:版本] /bin/bash  // 启动容器并进入
+docker run -it --name [容器名称] [镜像名称:版本] /bin/bash  // 启动容器并进入
+docker run -it --name [容器名称] -p 8080:80 [镜像名称:版本] /bin/bash  // 启动容器，端口映射
 docker logs 查看容器日志
 docker top <container_id> 查看容器最近的一个进程
-docker run -it --name [容器名称] -p 8080:80 [镜像名称:版本] /bin/bash  端口映射
 docker rm <container_id> 删除容器
 docker stop <container_id> 停止容器
 docker start <container_id> 开启容器
@@ -202,6 +202,8 @@ docker restart <container_id> 重启容器
 docker inspect <container_id> 查看容器详情
 docker commit [容器名称] my_image:v1.0  容器提交为新的镜像
 ```
+
+*借助 IDE 可以更方便的玩 docker，这里我们选择 vscode，安装 Remote - Containers 扩展，便可以打开正在运行中的容器目录*
 
 ### DockerFile常用命令
 
