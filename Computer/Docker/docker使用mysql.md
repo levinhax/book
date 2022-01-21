@@ -70,9 +70,19 @@ grant all privileges on *.* to 'username'@'%' identified by 'password' with gran
 SHOW VARIABLES LIKE 'validate_password%';
 ```
 
+查看数据库:
+```
+show databases;
+```
+
 创建数据库并设置编码:
 ```
 CREATE DATABASE `mydb` CHARACTER SET utf8 COLLATE utf8_general_ci;
+```
+
+查询用户：
+```
+select user,host from mysql.user;
 ```
 
 *不建议在docker里运行MySQL数据库软件，仅当测试或数据重要性不高时使用。*
@@ -108,4 +118,35 @@ ENV TZ ${TZ}
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 EXPOSE 3306
+```
+
+### 其他
+
+#### mysql 报错
+
+Error: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client
+
+起因：mysql8.0以上加密方式，Node还不支持。
+
+解决办法，
+
+方法1：执行指令
+
+```
+mysql -u root -p
+
+123456
+
+use mysql;
+
+alter user 'root'@'localhost' identified with mysql_native_password by '123456';
+
+flush privileges;
+```
+
+方法2: 升级mysql包
+
+使用Node MySQL 2
+```
+npm install --save mysql2
 ```
