@@ -150,3 +150,10 @@ flush privileges;
 ```
 npm install --save mysql2
 ```
+
+#### 连接提示
+
+Ignoring invalid configuration option passed to Connection: poolMax. This is currently a warning, but in future versions of MySQL2, an error will be thrown if you pass an invalid configuration option to a Connection
+
+解决方法：
+you have to change the connection property root as user
