@@ -46,10 +46,12 @@ docker run -p 3306:3306 --name mysql \
 docker exec -it <id> bash
 ```
 
-本机可以通过 root 和密码 123456 访问 MySQL 服务。
+然后可以通过 root 和密码 123456 访问 MySQL 服务。
 ```
 mysql -h localhost -u root -p
 ```
+
+![mysql命令](images/003.png)
 
 #### 常用命令:
 
