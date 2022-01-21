@@ -134,6 +134,8 @@
 
 - [docker简单命令](Computer/Docker/docker简单命令.md)
 - [一文搞懂docker](Computer/Docker/一文搞懂docker.md)
+- [docker使用nginx](Computer/Docker/docker使用nginx.md)
+- [docker使用mysql](Computer/Docker/docker使用mysql.md)
 
 ### Git(Git)
 
