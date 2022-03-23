@@ -79,6 +79,7 @@
 - [vue中使用echart在tooltip上添加点击事件](Engineering/ProjectScene/vue中使用echart在tooltip上添加点击事件.md)
 - [动效背景使用mp4替代gif](Engineering/ProjectScene/动效背景使用mp4替代gif.md)
 - [网站主题变换](Engineering/ProjectScene/网站主题变换.md)
+- [Token放在cookie, sessionStorage和localStorage中的区别](Engineering/Practice/../ProjectScene/Token放在cookie, sessionStorage和localStorage中的区别.md)
 
 ### 构建工具(Tooling)
 
