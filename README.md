@@ -35,6 +35,7 @@
 - [Promise的源码实现](Language/JS/Promise的源码实现.md)
 - [手写-compose函数](Language/JS/手写-compose函数.md)
 - [防抖与节流](Language/JS/防抖与节流.md)
+- [手写call、apply与bind](Language/Js/手写call、apply与bind.md)
 
 ### TS
 
