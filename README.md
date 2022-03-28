@@ -149,6 +149,7 @@
 ### Git(Git)
 
 - [git撤销commit](Computer/Git/git撤销commit.md)
+- [commit规范](Computer/Git/commit规范.md)
 
 ## 源码(SourceCode)
 
