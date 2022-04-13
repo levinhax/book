@@ -36,6 +36,7 @@
 - [手写-compose函数](Language/JS/手写-compose函数.md)
 - [防抖与节流](Language/JS/防抖与节流.md)
 - [手写call、apply与bind](Language/Js/手写call、apply与bind.md)
+- [数组扁平化](Language/JS/数组扁平化.md)
 
 ### TS
 
