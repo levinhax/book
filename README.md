@@ -156,6 +156,7 @@
 ### Vue3
 
 - [阅读源码前的一些必知](SourceCode/Vue3/阅读源码前的一些必知.md)
+- [初始化流程分析](SourceCode/Vue3/初始化流程分析.md)
 
 ### react
 
