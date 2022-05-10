@@ -102,6 +102,7 @@
 ### Vue
 
 - [简易实现vue3中的mount过程](Library/Vue/简易实现vue3中的mount过程.md)
+- [简易实现vue3中的patch过程](Library/Vue/简易实现vue3中的patch过程.md)
 
 ### Python
 
