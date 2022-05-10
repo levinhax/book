@@ -30,7 +30,7 @@ Module federation 使 JavaScript 应用得以从另一个 JavaScript 应用中�
 - remotes: 可选，作为引用方最关键的配置项，用于声明需要引用的远程资源包的名称与模块名称，作为 Host 时，去消费哪些 Remote
 - exposes: 可选，表示作为 Remote 时，export 哪些属性被消费
 - library: 可选,定义了 remote 应用如何将输出内容暴露给 host 应用。配置项的值是一个对象，如 { type: 'xxx', name: 'xxx'}
-- shared，可选,指示 remote 应用的输出内容和 host 应用可以共用哪些依赖。 shared 要想生效，则 host 应用和 remote 应用的 shared 配置的依赖要一致
+- shared，可选,指示 remote 应用的输出内容和 host 应用可以共用哪些依赖。 shared 要想生效，则 host 应用和 remote 应用的 shared 配置的依赖要一致；配置了这个属性，webpack在加载的时候会先判断本地应用是否存在对应的包，如果不存在，则加载远程应用的依赖包
   - Singleton: 是否开启单例模式。默认值为 false，开启后remote 应用组件和 host 应用共享的依赖只加载一次，而且是两者中版本比较高的
   - requiredVersion：指定共享依赖的版本，默认值为当前应用的依赖版本
   - eager：共享依赖在打包过程中是否被分离为 async chunk。设置为 true， 共享依赖会打包到 main、remoteEntry，不会被分离，因此当设置为true时共享依赖是没有意义的

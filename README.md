@@ -99,6 +99,10 @@
 
 - [React与Vue的常用点对比](Library/React/React与Vue的常用点对比.md)
 
+### Vue
+
+- [简易实现vue3中的mount过程](Library/Vue/简易实现vue3中的mount过程.md)
+
 ### Python
 
 - [提取pdf中的图片](Library/Python/提取pdf中的图片.md)
