@@ -65,6 +65,7 @@
 - [使用者体验量化Web Vitals](Engineering/Practice/使用者体验量化Web%20Vitals.md)
 - [前端自动化工具plopjs](Engineering/Practice/前端自动化工具plopjs.md)
 - [自动生成路由](Engineering/Practice/自动生成路由.md)
+- [实现动态切换主题](Engineering/Practice/实现动态切换主题.md)
 
 ### 项目场景(ProjectScene)
 
