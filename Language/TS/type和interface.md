@@ -1,3 +1,46 @@
+## 概念
+
+类型别名 type 可以用来给一个类型起个新名字，当命名基本类型或联合类型等非对象类型时非常有用;
+```
+type MyNumber = number;
+type StringOrNumber = string | number;
+type Callback = (data: string) => void;
+
+// lib.es5.d.ts
+type Partial<T> = {
+    [P in keyof T]?: T[P];
+};
+​
+type Required<T> = {
+    [P in keyof T]-?: T[P];
+};
+​
+type Pick<T, K extends keyof T> = {
+    [P in K]: T[P];
+};
+​
+type Record<K extends keyof any, T> = {
+    [P in K]: T;
+};
+​
+type Exclude<T, U> = T extends U ? never : T;
+```
+
+接口 interface 只能用于定义对象类型;
+```
+// packages/runtime-core/src/apiCreateApp.ts
+export interface App<HostElement = any> {
+  version: string
+  config: AppConfig
+  use(plugin: Plugin, ...options: any[]): this
+  mixin(mixin: ComponentOptions): this
+  component(name: string): Component | undefined // Getter
+  component(name: string, component: Component): this // Setter
+  directive(name: string): Directive | undefined
+  directive(name: string, directive: Directive): this
+}
+```
+
 ## 相同点
 
 都是用来定义 对象 或者 函数 的形状
