@@ -83,6 +83,7 @@
 - [动效背景使用mp4替代gif](Engineering/ProjectScene/动效背景使用mp4替代gif.md)
 - [网站主题变换](Engineering/ProjectScene/网站主题变换.md)
 - [Token放在cookie,sessionStorage和localStorage中的区别](./Engineering/ProjectScene/Token放在cookie,sessionStorage和localStorage中的区别.md)
+- [axios中用qs进行序列化](./Engineering/ProjectScene/axios中用qs进行序列化.md)
 
 ### 构建工具(Tooling)
 
