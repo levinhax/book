@@ -154,6 +154,7 @@
 - [一文搞懂docker](Computer/Docker/一文搞懂docker.md)
 - [docker使用nginx](Computer/Docker/docker使用nginx.md)
 - [docker使用mysql](Computer/Docker/docker使用mysql.md)
+- [linux常用命令](Computer/Docker/linux常用命令.md)
 
 ### Git(Git)
 
