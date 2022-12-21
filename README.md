@@ -150,6 +150,7 @@
 ### Nginx(Nginx)
 
 - [前端需要了解的Nginx知识](Computer/Nginx/前端需要了解的Nginx知识.md)
+- [nginx部署在非一级目录](Computer/Nginx/nginx部署在非一级目录.md)
 
 ### Docker(Docker)
 

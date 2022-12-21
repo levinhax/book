@@ -157,3 +157,26 @@ Ignoring invalid configuration option passed to Connection: poolMax. This is cur
 
 解决方法：
 you have to change the connection property root as user
+
+#### 建立数据库
+
+建立一个名为 meta 的库
+```
+create database meta;
+```
+
+建立一个名为 user 的表
+```
+create table user
+(
+    id int auto_increment primary key,
+    email varchar(30) not null,
+    password varchar(40) not null
+)
+comment '用户表';
+```
+
+删除表
+```
+drop table user;
+```
