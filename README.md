@@ -152,6 +152,7 @@
 
 - [前端需要了解的Nginx知识](Computer/Nginx/前端需要了解的Nginx知识.md)
 - [nginx部署在非一级目录](Computer/Nginx/nginx部署在非一级目录.md)
+- [Nginx中配置HTTP2](Computer/Nginx/Nginx中配置HTTP2.md)
 
 ### Docker(Docker)
 
