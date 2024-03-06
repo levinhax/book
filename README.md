@@ -110,6 +110,7 @@
 
 - [Vue的对比](Library/Vue/Vue的对比.md)
 - [Vue3总结](Library/Vue/Vue3总结.md)
+- [Vue2和Vue3有哪些区别](Library/Vue/Vue2和Vue3有哪些区别.md)
 - [简易实现vue3中的mount过程](Library/Vue/简易实现vue3中的mount过程.md)
 - [简易实现vue3中的patch过程](Library/Vue/简易实现vue3中的patch过程.md)
 
