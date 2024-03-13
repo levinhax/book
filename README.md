@@ -38,6 +38,7 @@
 - [防抖与节流](Language/JS/防抖与节流.md)
 - [手写call、apply与bind](Language/Js/手写call、apply与bind.md)
 - [数组扁平化](Language/JS/数组扁平化.md)
+- [闭包](Language/JS/闭包.md)
 
 ### TS
 
