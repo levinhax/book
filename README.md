@@ -118,6 +118,7 @@
 - [Vue2和Vue3有哪些区别](Library/Vue/Vue2和Vue3有哪些区别.md)
 - [简易实现vue3中的mount过程](Library/Vue/简易实现vue3中的mount过程.md)
 - [简易实现vue3中的patch过程](Library/Vue/简易实现vue3中的patch过程.md)
+- [Vue组件传参](Library/Vue/Vue组件传参.md)
 
 ### Python
 
