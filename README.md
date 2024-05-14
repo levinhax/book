@@ -69,6 +69,7 @@
 - [自动生成路由](Engineering/Practice/自动生成路由.md)
 - [实现动态切换主题](Engineering/Practice/实现动态切换主题.md)
 - [前端项目重构的一些思考](Engineering/Practice/前端项目重构的一些思考.md)
+- [前端团队规范](Engineering/Practice/前端团队规范.md)
 
 ### 项目场景(ProjectScene)
 
