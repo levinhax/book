@@ -70,6 +70,7 @@
 - [实现动态切换主题](Engineering/Practice/实现动态切换主题.md)
 - [前端项目重构的一些思考](Engineering/Practice/前端项目重构的一些思考.md)
 - [前端团队规范](Engineering/Practice/前端团队规范.md)
+- [前端项目性能优化方案](Engineering/Practice/前端项目性能优化方案.md)
 
 ### 项目场景(ProjectScene)
 
