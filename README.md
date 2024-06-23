@@ -106,6 +106,7 @@
 - [h5与原生交互JsBridge](Engineering/Mobile/h5与原生交互JsBridge.md)
 - [uniapp和小程序](Engineering/Mobile/uniapp和小程序.md)
 - [小程序面试题](Engineering/Mobile/小程序面试题.md)
+- [taro开发小程序](Engineering/Mobile/taro开发小程序.md)
 
 ## 框架(Library)
 
@@ -113,6 +114,7 @@
 
 - [React与Vue的常用点对比](Library/React/React与Vue的常用点对比.md)
 - [React常见面试题](Library/React/React常见面试题.md)
+- [React项目优化](Library/React/React项目优化.md)
 
 ### Vue
 
